@@ -33,7 +33,7 @@
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter Password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>Password must have at least 8 characters, including at least one uppercase letter, one lowercase letter, one number and one special character</strong>
                                     </span>
                                 @enderror
                             </div>

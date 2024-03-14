@@ -18,7 +18,13 @@ class ResetPasswordController extends Controller
     {
         $request->validate([
             'email' => 'required|email|exists:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+                'confirmed',
+            ],
             'password_confirmation' => 'required',
         ]);
 
@@ -29,12 +35,12 @@ class ResetPasswordController extends Controller
             return back();
         }
         else{
-            
+
             $user = User::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
             DB::table('password_resets')->where(['email'=> $request->email])->delete();
             Toastr::success('Your password has been changed! :)','Success');
             return redirect('/login');
         }
-       
+
     }
 }

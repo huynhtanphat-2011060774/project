@@ -26,12 +26,18 @@ class RegisterController extends Controller
             'email'     => 'required|string|email|max:255|unique:users',
             'role_name' => 'required|string|max:255',
             'password'  => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+                'confirmed',
+            ],
         ]);
 
         $dt       = Carbon::now();
         $todayDate = $dt->toDayDateTimeString();
-        
+
         User::create([
             'name'      => $request->name,
             'avatar'    => $request->image,

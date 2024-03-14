@@ -29,12 +29,13 @@ class ForgotPasswordController extends Controller
             ['email' => $request->email, 'token' => $token, 'created_at' => Carbon::now()]
         );
 
-        Mail::send('auth.verify',['token' => $token], function($message) use ($request) {
-                  $message->from($request->email);
-                  $message->to('your email');
-                  $message->subject('Reset Password Notification');
-               });
-        Toastr::success('We have e-mailed your password reset link! :)','Success');
+        Mail::send('auth.verify', ['token' => $token], function ($message) use ($request) {
+            $message->from($request->email);
+            $message->to('phathuynhtanphat840@gmail.com');
+            $message->subject('Reset Password Notification');
+        });
+
+        Toastr::success('We have e-mailed your password reset link! :)', 'Success');
         return back();
     }
 }

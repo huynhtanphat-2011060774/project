@@ -13,7 +13,7 @@
                     <div class="account-wrapper">
                         <h3 class="account-title">Register</h3>
                         <p class="account-subtitle">Access to our dashboard</p>
-                        
+
                         <!-- Account Form -->
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
@@ -57,12 +57,12 @@
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter Password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>Password must have at least 8 characters, including at least one uppercase letter, one lowercase letter, one number and one special character</strong>
                                     </span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label><strong>Repeat Password</strong></label>
+                                <label><strong>Comfirm Password</strong></label>
                                 <input type="password" class="form-control" name="password_confirmation" placeholder="Choose Repeat Password">
                             </div>
                             <div class="form-group text-center">
