@@ -89,12 +89,16 @@ Route::controller(LockScreen::class)->group(function () {
     Route::post('unlock', 'unlock')->name('unlock');
 });
 
+
+
+
 // ------------------------------ register ---------------------------------//
 Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'register')->name('register');
     Route::post('/register','storeUser')->name('register');
 });
-
+Route::get('/verify-otp', [RegisterController::class, 'showOTPForm'])->name('otp.verify.form');
+Route::put('/verify-otp', [RegisterController::class, 'verifyOTP'])->name('otp.verify');
 // ----------------------------- forget password ----------------------------//
 Route::controller(ForgotPasswordController::class)->group(function () {
     Route::get('forget-password', 'getEmail')->name('forget-password');

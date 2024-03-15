@@ -38,5 +38,13 @@ class VerificationController extends Controller
         $this->middleware('auth');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
+
+        $user = User::where('verification_token', $request->token)->firstOrFail();
+
+        $user->update(['email_verified_at' => now(), 'verification_token' => null]);
+
+        event(new Verified($user));
+
+        return redirect()->route('login')->with('verified', true);
     }
 }
